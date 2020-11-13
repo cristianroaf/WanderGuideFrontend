@@ -5,10 +5,153 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="WanderGuideFrontend.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
     <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
-        </StackLayout>
+        <ScrollView>
+
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="1">
+                    <Image
+                    Source="icon.png"
+                    HeightRequest="100"
+                    WidthRequest="100"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2" HorizontalOptions="Center" Orientation="Vertical" Margin="0,0,0,10">
+                    <Label
+                         Text="Welcome Back"
+                         FontAttributes="Bold"
+                         HorizontalOptions="Center"
+                         FontSize="26"
+                         Margin="0,0,0,5"
+                         WidthRequest="300"
+                         TextColor="Black"/>
+                    <Label
+                        Text="Sign in to continue"
+                        TextColor="Black"
+                        FontSize="15"
+                        WidthRequest="300"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical"  >
+                    <Label
+                        Text="Username"
+                        FontSize="13"
+                        TextColor="Black"/>
+                    <Frame
+                        HasShadow="true"
+                        Padding="8"
+                        CornerRadius="7">
+                        <Entry
+                            Placeholder="Username_example"
+                            Keyboard="Email"
+                            MaxLength="20"
+                            TextColor="Black"
+                            Text="{Binding UsernameTxt, Mode=TwoWay}"
+                            IsEnabled="{Binding IsEnabledTxt}"
+                            FontSize="15"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="0">
+                        <Label
+                            Text="Password"
+                            FontSize="13"
+                            TextColor="Black"
+                             VerticalOptions="Center"
+                             WidthRequest="150"/>
+                        <Button
+                             Text="¿Forgot password?"
+                             TextColor="Black"
+                             FontSize="13"
+                             WidthRequest="150"
+                             HorizontalOptions="End"
+                             BackgroundColor="White"
+                             HeightRequest="30"
+                             Padding="0"
+                             Clicked="GoToRecovery_Clicked"/>
+                    </StackLayout>
+                    <Frame
+                             HasShadow="true"
+                             Padding="8"
+                             CornerRadius="7">
+                        <Entry
+                                Placeholder="******************"
+                                MaxLength="25"
+                                IsPassword="True"
+                                FontSize="15"
+                                TextColor="Black"
+                                Text="{Binding PasswordTxt, Mode=TwoWay}"
+                                IsEnabled="{Binding IsEnabledTxt}"/>
+                    </Frame>
+
+                </StackLayout>
+                <StackLayout Margin="55,0,0,0" Grid.Row="5" HorizontalOptions="StartAndExpand" Padding="0" Orientation="Horizontal">
+                    <Label Text="Remember me"
+                           TextColor="Black"
+                           VerticalTextAlignment="Center"></Label>
+                    <Switch 
+                        OnColor="Black"
+                        ThumbColor="#84adf0"
+                        IsToggled="{Binding IsToggledTxt}"/>
+                    <Label 
+                        Margin="45,0,0,0"
+                        Text="Autologin"
+                           TextColor="Black"
+                           VerticalTextAlignment="Center"></Label>
+                    <Switch 
+                        OnColor="Black"
+                        ThumbColor="#84adf0"
+                        IsToggled="{Binding IsToggledAutologinTxt}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="6" HorizontalOptions="Center" Padding="0">
+                    <ActivityIndicator
+                       IsRunning="{Binding IsRunningTxt}"
+                       IsVisible="{Binding IsVisibleTxt}"
+                       Color="Black"
+                       Scale="0.8"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="7" HorizontalOptions="Center" Orientation="Vertical" >
+                    <Button
+                        Text="Log in"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        Font="Montserrat-Medium.otf"
+                        FontSize="20"
+                        BackgroundColor="#84ADF0"
+                        BorderColor="#000000"
+                        BorderWidth="1.5"
+                        WidthRequest="300"
+                        HeightRequest="50"
+                        CornerRadius="7"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsEnabledTxt}"/>
+                    <Button
+                            Text="Don't have an account? Sign Up"
+                            TextColor="Black"
+                            FontSize="11"
+                            BackgroundColor="White"
+                            Clicked="GoToRegister_Clicked"/>
+
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

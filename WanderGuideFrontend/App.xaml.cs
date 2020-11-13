@@ -8,17 +8,21 @@ namespace WanderGuideFrontend
 {
     public partial class App : Application
     {
-
+        public static string User_id { get; set; }
+        public static string Username { get; set; }
         public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            User_id = "";
+            Username = "";
+
             MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
+            Shell.Current.GoToAsync("//LoginPage");
         }
 
         protected override void OnSleep()

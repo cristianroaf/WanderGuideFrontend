@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WanderGuideFrontend.Views.RecoveryPage"
+             BackgroundColor="white"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="1">
+                <Image
+                    Source="icon.png"
+                    HeightRequest="100"
+                    WidthRequest="100"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                <Label
+                    Text="Password recovery"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    FontSize="26"
+                    Margin="0,0,0,5"
+                    WidthRequest="300"
+                    TextColor="Black"
+                    />
+            </StackLayout>
+
+            <StackLayout Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical"  >
+                <Label
+                    Text="Email"
+                    FontSize="13"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="6"
+                    CornerRadius="7">
+                    <Entry
+                    Placeholder="user@example.com"
+                    Keyboard="Email"
+                    MaxLength="25"
+                    FontSize="15"
+                    TextColor="Black"
+                    Text="{Binding EmailTxt, Mode=TwoWay}"
+                    IsEnabled="{Binding IsEnabledTxt}"/>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Grid.Row="7" HorizontalOptions="Center">
+                <ActivityIndicator
+                       IsRunning="{Binding IsRunningTxt, Mode=TwoWay}"
+                       IsVisible="{Binding IsVisibleTxt, Mode=TwoWay}"
+                       Color="Black"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="8" HorizontalOptions="Center" Orientation="Vertical" >
+                <Button
+                    Text="Send email"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Font="Montserrat-Medium.otf"
+                    FontSize="20"
+                    BackgroundColor="#84ADF0"
+                    BorderColor="#000000"
+                    BorderWidth="1.5"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    CornerRadius="7"
+                    Command="{Binding RecoveryCommand}"
+                    IsEnabled="{Binding IsEnabledTxt, Mode=TwoWay}"/>
+                <Button
+                    Text="Back to Log in"
+                    TextColor="Black"
+                    FontSize="11"
+                    BackgroundColor="White"
+                    Clicked="GoToLogin_Clicked"/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
