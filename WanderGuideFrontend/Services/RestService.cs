@@ -53,7 +53,8 @@ namespace WanderGuideFrontend.Services
                     return (null, 412); //User not verified
                 }
             }
-            catch {
+            catch (Exception e){
+                Console.WriteLine(e.Message);
                 return (null, 408); } //Request timed out
             return (null, 400); //Unknown error
         }
