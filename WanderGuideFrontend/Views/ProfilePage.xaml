@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WanderGuideFrontend.Views.ProfilePage"
+             xmlns:local="clr-namespace:WanderGuideFrontend.ViewModels"  
+             xmlns:model="clr-namespace:WanderGuideFrontend.Models"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="#ebf1f7">
+
+
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <ContentPage.Content>
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="20">
+                <Button   
+                    Text="Logout"
+                    BackgroundColor="Red"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    WidthRequest="100"
+                    HeightRequest="40"
+                    CornerRadius="20"
+                    Command="{Binding LogoutCommand}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Grid.Column="1"  Orientation="Horizontal" HorizontalOptions="End">
+                <Button
+                    Margin="0,20,20,20"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    Text="{Binding ButtonTxt}"
+                    Command="{Binding EditCommand}"
+                    WidthRequest="100"
+                    HeightRequest="40"
+                    CornerRadius="20"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="0">
+                    <controls:CircleImage 
+                            x:Name="Profile_Image"        
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            Aspect="AspectFill"
+                            BorderThickness="2"
+                            BorderColor="Black"
+                            Source="{Binding ProfilePic, Mode=TwoWay}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnProfileImageClicked" />
+                        </Image.GestureRecognizers>
+                    </controls:CircleImage>
+                    <Label
+                        Margin="15,0,0,0"
+                        Text="{Binding UsernameTxt}"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        FontSize="28"
+                        WidthRequest="300"
+                        TextColor="Black"/>
+
+
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+
+                <Label
+                    Text="Name:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="6"
+                    CornerRadius="7">
+                    <Entry 
+                    TextColor="Black"
+                    Keyboard="Default"
+                    PlaceholderColor="Gray"
+                    BackgroundColor="White"
+                    Text="{Binding NameTxt}"
+                    IsReadOnly="{Binding IsEnabledTxt}"></Entry>
+                </Frame>
+
+            </StackLayout>
+            <StackLayout Grid.Row="4" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                <Label
+                    Text="Description:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="6"
+                    CornerRadius="7">
+                    <Entry
+                    Keyboard="Default"
+                        TextColor="Black"
+                        PlaceholderColor="Gray"
+                        IsReadOnly="{Binding IsEnabledTxt}"
+                        Text="{Binding DescriptionTxt}"/>
+                </Frame>
+
+            </StackLayout>
+            <StackLayout Grid.Row="5" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                <Label
+                    Text="Age:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="6"
+                    CornerRadius="7">
+                    <Entry
+                    Keyboard="Numeric"
+                        TextColor="Black"
+                        PlaceholderColor="Gray"
+                    Text="{Binding AgeTxt}"
+                    IsReadOnly="{Binding IsEnabledTxt}"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                <Label
+                    Text="Member Since:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Label
+                    HorizontalOptions="Start"
+                    FontSize="18"
+                    TextColor="Black"
+                    Text="{Binding DateTxt}"></Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

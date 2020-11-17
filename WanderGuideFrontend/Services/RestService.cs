@@ -20,7 +20,8 @@ namespace WanderGuideFrontend.Services
             {
                 Timeout = TimeSpan.FromSeconds(10)
             };
-            baseuri = "http://localhost:3000";
+            //baseuri = "http://localhost:3000";
+            baseuri = "http://wander-guide.herokuapp.com";
         }
         public async Task<(User, int)> Login(string username, string password)
         {
@@ -108,6 +109,78 @@ namespace WanderGuideFrontend.Services
                 }
             }
             catch { return 408; }
+            return 400;
+        }
+        public async Task<(Profile, int)> GetProfile(string id)
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/profile/" + id),
+                Method = HttpMethod.Get
+            };
+            request.Headers.Add("Accept", "application/json");
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                Profile profile = JsonConvert.DeserializeObject<Profile>(content);
+                return (profile, 200);
+            }
+            return (null, 400);
+        }
+        public async Task<(ProfileImage, int)> GetProfileImage(string id)
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/profile/" + id + "/image"),
+                Method = HttpMethod.Get
+            };
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                ProfileImage profileImage = JsonConvert.DeserializeObject<ProfileImage>(content);
+                return (profileImage, 200);
+            }
+            return (null, 400);
+        }
+        public async Task<int> UpdateProfile(string id, string name, string description, string age)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/profile/" + id),
+                    Content = new StringContent("{\"name\":\"" + name + "\",\"description\":\"" + description + "\",\"age\":\"" + age + "\"}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Profile updated
+                }
+            }
+            catch
+            {
+                return 408;
+            }
+            return 400;
+        }
+        public async Task<int> UpdateProfileImage(string id, byte[] buffer)
+        {
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/profile/" + id + "/image")
+            };
+            string imageAsString = Convert.ToBase64String(buffer);
+            request.Content = new StringContent("{\"buffer\":\"" + imageAsString + "\"}", Encoding.UTF8, "application/json");
+            request.Headers.Add("Accept", "application/json");
+            request.Method = HttpMethod.Post;
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return 200;
+            }
             return 400;
         }
     }

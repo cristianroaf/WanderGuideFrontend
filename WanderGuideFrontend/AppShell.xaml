@@ -32,7 +32,7 @@
     <TabBar>
         <ShellContent Title="Map" Icon="map.png" Route="MapPage" ContentTemplate="{DataTemplate local:AboutPage}"/>
         <ShellContent Title="Create" Icon="guides.png" Route="CreateGuidePage" ContentTemplate="{DataTemplate local:ItemsPage}" />
-        <ShellContent Title="Profile" Icon="profile.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Profile" Icon="profile.png" Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
     </TabBar>
 
     <!--
