@@ -183,5 +183,34 @@ namespace WanderGuideFrontend.Services
             }
             return 400;
         }
+        public async Task<(List<Guide>, int)> GetPublishedGuides()
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/"),
+                    Method = HttpMethod.Get
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<Guide> guides = JsonConvert.DeserializeObject<List<Guide>>(content);
+                    return (guides, 200);
+                }
+                else if (response.StatusCode == HttpStatusCode.Created)
+                {
+                    return (null, 201); //There are no guides
+                }
+                return (null, 400);
+            }
+            catch
+            {
+                return (null, 408);
+            }
+
+        }
     }
 }

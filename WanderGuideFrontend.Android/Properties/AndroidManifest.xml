@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.wanderguidefrontend">
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
-    <application android:label="WanderGuideFrontend.Android" android:theme="@style/MainTheme" android:usesCleartextTraffic="true"></application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+  <!-- Google Maps for Android v2 requires OpenGL ES v2 -->
+  <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+  <!-- Necessary for apps that target Android 9.0 or higher -->
+
+  <application android:label="WanderGuideFrontend.Android"
+    android:theme="@style/MainTheme"
+    android:usesCleartextTraffic="true">
+    <provider android:name="androidx.core.content.FileProvider"
+              android:authorities="${applicationId}.fileprovider"
+              android:exported="false"
+              android:grantUriPermissions="true">
+
+      <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                       android:resource="@xml/file_paths"></meta-data>
+    </provider>
+    <uses-library android:name="org.apache.http.legacy" android:required="false" />
+    <!-- Put your Google Maps V2 API Key here. -->
+    <meta-data
+      android:name="com.google.android.maps.v2.API_KEY"
+      android:value="AIzaSyCxB6f4S2CKxdQ18T7-Q8qzi5_mW87EGSY" />
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+    <!-- Necessary for apps that target Android 9.0 or higher -->
+    <uses-library android:name="org.apache.http.legacy" android:required="false" />
+  </application>
 </manifest>
