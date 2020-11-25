@@ -212,5 +212,194 @@ namespace WanderGuideFrontend.Services
             }
 
         }
+        public async Task<(Guide, int)> GetPublishedGuide(string id)
+        {
+
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/guides/" + id),
+                Method = HttpMethod.Get
+            };
+            request.Headers.Add("Accept", "application/json");
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                Guide guide = JsonConvert.DeserializeObject<Guide>(content);
+                return (guide, 200);
+            }
+            else if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return (null, 201); //Guide does not exist
+            }
+            return (null, 400);
+        }
+        public async Task<(List<Stop>, int)> GetPublishedStops(string id)
+        {
+
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/guides/" + id + "/stops/"),
+                Method = HttpMethod.Get
+            };
+            request.Headers.Add("Accept", "application/json");
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                List<Stop> stops = JsonConvert.DeserializeObject<List<Stop>>(content);
+                return (stops, 200);
+            }
+            else if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return (null, 201); //User has no draft guide
+            }
+            return (null, 400);
+        }
+        public async Task<(Guide, int)> GetDraftGuide(string id)
+        {
+
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/guides/" + id + "/draft/guide"),
+                Method = HttpMethod.Get
+            };
+            request.Headers.Add("Accept", "application/json");
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                Guide guide = JsonConvert.DeserializeObject<Guide>(content);
+                return (guide, 200);
+            }
+            else if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return (null, 201); //User has no draft guide
+            }
+            return (null, 400);
+        }
+        public async Task<(List<Stop>, int)> GetDraftStops(string id)
+        {
+
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                RequestUri = new Uri(baseuri + "/guides/" + id + "/draft/stops"),
+                Method = HttpMethod.Get
+            };
+            request.Headers.Add("Accept", "application/json");
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                List<Stop> stops = JsonConvert.DeserializeObject<List<Stop>>(content);
+                return (stops, 200);
+            }
+            else if (response.StatusCode == HttpStatusCode.Created)
+            {
+                return (null, 201); //User has no draft guide
+            }
+            return (null, 400);
+        }
+        public async Task<int> CreateStop(string id, string title, string description, double latitude, double longitude)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/" + id + "/draft"),
+                    Content = new StringContent("{\"title\":\"" + title + "\",\"description\":\"" + description + "\",\"latitude\":\"" + latitude + "\",\"longitude\":\"" + longitude + "\"}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Verification email sent
+                }
+            }
+            catch { return 408; } //Request timed out
+            return 400; //Unknown error
+
+        }
+        public async Task<int> DeleteStop(string id)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/stop/" + id + "/delete"),
+                    Content = new StringContent("{}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Verification email sent
+                }
+            }
+            catch { return 408; } //Request timed out
+            return 400; //Unknown error
+        }
+        public async Task<int> DeleteGuide(string user_id, string guide_id)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/" + guide_id + "/delete"),
+                    Content = new StringContent("{\"user_id\":\"" + user_id + "\"}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Verification email sent
+                }
+            }
+            catch { return 408; } //Request timed out
+            return 400; //Unknown error
+        }
+        public async Task<int> PublishDraftGuide(string id)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/" + id + "/publish"),
+                    Content = new StringContent("{}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Verification email sent
+                }
+            }
+            catch { return 408; } //Request timed out
+            return 400; //Unknown error
+        }
+        public async Task<int> UpdateDraftTitle(string id, string title)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/" + id + "/draft/title"),
+                    Content = new StringContent("{\"title\":\"" + title + "\"}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Title updated
+                }
+            }
+            catch { return 408; } //Request timed out
+            return 400; //Unknown error
+        }
     }
 }

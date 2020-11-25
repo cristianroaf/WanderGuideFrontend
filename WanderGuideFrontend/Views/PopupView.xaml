@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WanderGuideFrontend.Views.PopupView"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 CloseWhenBackgroundIsClicked="False">
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
+        <Frame BorderColor="Black" WidthRequest="270" HeightRequest="370" Padding="15">
+            <StackLayout>
+                <Image Source = "guides.png" WidthRequest="70" HeightRequest="80" />
+                <Label Text ="Title:" 
+                       FontAttributes="Bold"
+                       FontSize="17"
+                       TextColor="Black"/>
+                <Frame
+                        HasShadow="true"
+                        Padding="8"
+                        CornerRadius="7"
+                    BorderColor="Black">
+                    <Entry Placeholder="Sample title" 
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       Text="{Binding TitleTxt, Mode=TwoWay}"/>
+                </Frame>
+                <Label 
+                    Text ="Description:"
+                    FontAttributes="Bold"
+                    FontSize="17"
+                    TextColor="Black"/>
+                <Frame
+                        HasShadow="true"
+                        Padding="8"
+                        CornerRadius="7"
+                    BorderColor="Black">
+                    <Entry Placeholder="Sample description" 
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       Text="{Binding DescriptionTxt, Mode=TwoWay}"/>
+                </Frame>
+                <Button 
+                    BorderColor="Black"
+                        BorderWidth="1"
+                    Margin="0,10,0,0"
+                    Text="Save interest point" BackgroundColor="#5190f5" HeightRequest="35" TextColor="White" CornerRadius="20"
+                    Command="{Binding SavedPointCommand}"/>
+                <Button BorderColor="Black"
+                        BorderWidth="1"
+                        Text="Back" BackgroundColor="#5190f5" HeightRequest="35" TextColor="White"
+                        Command="{Binding BackCommand}"
+                        CornerRadius="20" ></Button>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

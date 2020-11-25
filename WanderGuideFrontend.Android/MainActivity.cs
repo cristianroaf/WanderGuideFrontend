@@ -21,6 +21,7 @@ namespace WanderGuideFrontend.Droid
             base.OnCreate(savedInstanceState);
 
             RequestedOrientation = ScreenOrientation.Portrait;
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             ImageCircleRenderer.Init();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
