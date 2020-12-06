@@ -41,6 +41,8 @@ namespace WanderGuideFrontend.ViewModels
                         Position = new Position(guide.latitude, guide.longitude),
                         Label = guide.title, //Titulo label
                         Address = guide.creator_username, //Persona snippet
+                        Name = Math.Round(guide.rating, 1).ToString(), //Rating
+                        Url = guide._id
                     };
                     Map.CustomPins.Add(location);
                     Map.Pins.Add(location);
