@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WanderGuideFrontend.Views.GuideInfoPage"
+             BackgroundColor="#ebf1f7"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False">
+    <ContentPage.Content>
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalOptions="Center" WidthRequest="300">
+                <Label Text="{Binding TitleTxt}"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           TextColor="Black"></Label>
+                <StackLayout WidthRequest="300" HeightRequest="40" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand" 
+                        Text="{Binding UsernameTxt}"
+                           VerticalTextAlignment="Center"
+                           TextColor="Gray"></Label>
+                    <Button HorizontalOptions="End" BackgroundColor="Red"
+                            CornerRadius="20"
+                            Text="Delete Guide"
+                            BorderColor="Black"
+                            BorderWidth="1"
+                            Command="{Binding DeleteCommand}"
+                            IsVisible="{Binding isGuideOwner}"></Button>
+                </StackLayout>
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Grid.ColumnSpan="2" WidthRequest="300" HeightRequest="40" HorizontalOptions="Center" Orientation="Horizontal">
+                <Frame Margin="0" Padding="3,0,0,0" BorderColor="Black" HorizontalOptions="StartAndExpand" WidthRequest="100" CornerRadius="10">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Margin="5" Source="star" HeightRequest="40"/>
+                        <Label Margin="-2,0,0,0"
+                                VerticalTextAlignment="Center" 
+                               Text="{Binding RatingTxt}"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+                <Button 
+                    Text="Rate"
+                        CornerRadius="20"
+                        BorderColor="Black"
+                        BorderWidth="1"
+                        Command="{Binding RateCommand}"/>
+                <Button Text="Creator"
+                        WidthRequest="105"
+                        CornerRadius="20"
+                        BorderColor="Black"
+                        BorderWidth="1"
+                        HorizontalOptions="End"
+                        Clicked="GoToCreator"/>
+
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+
+                <Button
+                    Text="Watch Guide on the Map"
+                    BorderColor="Black"
+                    BorderWidth="1"
+                    WidthRequest="100"
+                    HeightRequest="40"
+                    CornerRadius="20"
+                    Clicked="WatchOnTheMap"/>
+
+
+                <Frame Padding="5,10,5,10" Margin="0,10,0,10" HorizontalOptions="FillAndExpand" WidthRequest="350" VerticalOptions="FillAndExpand" CornerRadius="10" BorderColor="Black" BackgroundColor="#e0b275">
+                    <ListView ItemsSource="{Binding StopsList, Mode=TwoWay}"
+                              RowHeight="55"
+                              SeparatorVisibility="None">
+                        <ListView.ItemTemplate >
+                            <DataTemplate >
+                                <ViewCell>
+                                    <Frame Padding="0" Margin="0" BackgroundColor="#e0b275">
+                                        <StackLayout Orientation="Vertical">
+                                            <Frame HeightRequest="100" Padding="0,0" BorderColor="Black" CornerRadius="20" BackgroundColor="white">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <StackLayout Padding="10,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                                        <Image
+                                                            Source="guides_round.png"
+                                                               HeightRequest="40"
+                                                               WidthRequest="40"/>
+
+                                                        <StackLayout Orientation="Vertical">
+                                                            <Label Text="{Binding title}"
+                                                               FontAttributes="Bold"
+                                                               TextColor="Black"
+                                                               Margin="0,5,0,0"/>
+                                                            <Label Text="{Binding description}"
+                                                              Margin="0,-5,0,0"
+                                                                   TextColor="Gray"/>
+                                                        </StackLayout>
+
+                                                    </StackLayout>
+                                                    <StackLayout HorizontalOptions="End"
+                                                         HeightRequest="50"
+                                                         WidthRequest="50">
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                            <BoxView HeightRequest="5"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </Frame>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -18,6 +18,14 @@ namespace WanderGuideFrontend
             Username = "";
 
             MainPage = new AppShell();
+
+            MessagingCenter.Subscribe<App, string>(App.Current, "OpenPage", (snd, arg) =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    MainPage.Navigation.PushAsync(new GuideInfoPage(arg));
+                });
+            });
         }
 
         protected override void OnStart()

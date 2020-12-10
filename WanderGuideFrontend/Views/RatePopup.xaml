@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WanderGuideFrontend.Views.RatePopup"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
+        <Frame BorderColor="Black" WidthRequest="280" Padding="15" Background="info_bakground.png">
+            <StackLayout>
+                <Image Source = "star.png" WidthRequest="70" HeightRequest="80" />
+                <Label Text ="Give this guide a rating:" 
+                       FontAttributes="Bold"
+                       FontSize="17"/>
+                <Frame 
+                    BorderColor="Black"
+                    Margin="0" Padding="20"  CornerRadius="10" BackgroundColor="#e0b275">
+                    <StackLayout Margin="0,20,0,0">
+                        <Slider VerticalOptions="CenterAndExpand"
+                                ThumbColor="#5190f5"
+                                Maximum="10"
+                                Minimum="0"
+                                Value="{Binding SliderValue}"
+                                MaximumTrackColor="Black"
+                                MinimumTrackColor="Black"
+                                ValueChanged="OnSliderValueChanged"/>
+                        <Label 
+                    Text ="{Binding ValueTxt}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    FontSize="17"
+                         TextColor="Black"   />
+                    </StackLayout>
+                </Frame>
+
+                <Button Margin="0,10,0,0"
+                        BorderColor="Black"
+                        BorderWidth="1"
+                    Text="Send rating" BackgroundColor="#5190f5" HeightRequest="35" TextColor="White" CornerRadius="20"
+                    Command="{Binding SaveRatingCommand}"/>
+                <Button BorderColor="Black"
+                        BorderWidth="1"
+                        Text="Back" BackgroundColor="#5190f5" HeightRequest="35" TextColor="White"
+                        Command="{Binding BackCommand}"
+                        CornerRadius="20" ></Button>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

@@ -401,5 +401,38 @@ namespace WanderGuideFrontend.Services
             catch { return 408; } //Request timed out
             return 400; //Unknown error
         }
+        public async Task<int> RateGuide(string user_id, string guide_id, double value)
+        {
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(baseuri + "/guides/rate"),
+                    Content = new StringContent("{\"user_id\":\"" + user_id + "\",\"guide_id\":\"" + guide_id + "\",\"rate\":\"" + value + "\"}", Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Post
+                };
+                request.Headers.Add("Accept", "application/json");
+                HttpResponseMessage response = await client.SendAsync(request);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 200; //Saved successfully
+                }
+                else if (response.StatusCode == HttpStatusCode.Created)
+                {
+                    return 201; //Guide does not exist
+                }
+                else if (response.StatusCode == HttpStatusCode.Accepted)
+                {
+                    return 202; //You can't rate your own guide
+                }
+                else if (response.StatusCode == HttpStatusCode.NonAuthoritativeInformation)
+                {
+                    return 203;//You already rates this guide
+                }
+            }
+            catch { return 408; } //Request timed out
+            return 400; //Unknown error
+
+        }
     }
 }
