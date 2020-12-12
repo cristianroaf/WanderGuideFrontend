@@ -23,7 +23,7 @@ namespace WanderGuideFrontend.Views
 
         private void WatchOnTheMap(object sender, EventArgs e)
         {
-            //Navigation.PushAsync(new GuideMapPage(viewModel.guide_id));
+            Navigation.PushAsync(new GuideMapPage(viewModel.guide_id));
         }
 
         private void GoToCreator(object sender, EventArgs e)
