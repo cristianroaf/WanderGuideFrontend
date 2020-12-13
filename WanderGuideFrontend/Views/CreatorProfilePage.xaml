@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WanderGuideFrontend.Views.CreatorProfilePage"
+             xmlns:local="clr-namespace:WanderGuideFrontend.ViewModels"  
+             xmlns:model="clr-namespace:WanderGuideFrontend.Models"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="#ebf1f7">
+
+
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <ContentPage.Content>
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <StackLayout Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="0">
+                    <controls:CircleImage 
+                            x:Name="Profile_Image"        
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            Aspect="AspectFill"
+                            BorderThickness="2"
+                            BorderColor="Black"
+                            Source="{Binding ProfilePic, Mode=TwoWay}">
+                    </controls:CircleImage>
+                    <Label
+                        Margin="15,0,0,0"
+                        Text="{Binding UsernameTxt}"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        FontSize="28"
+                        WidthRequest="300"
+                        TextColor="Black"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+
+                <Label
+                    Text="Name:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="15,20,0,20"
+                    CornerRadius="7">
+                    <Label 
+                    TextColor="Black"
+                    FontSize="16"
+                    BackgroundColor="White"
+                    Text="{Binding NameTxt}"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Grid.Row="4" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                <Label
+                    Text="Description:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="15,20,0,20"
+                    CornerRadius="7">
+                    <Label 
+                    TextColor="Black"
+                        FontSize="16"
+                    BackgroundColor="White"
+                    Text="{Binding DescriptionTxt}"/>
+                </Frame>
+
+            </StackLayout>
+            <StackLayout Grid.Row="5" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                <Label
+                    Text="Age:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Frame
+                    HasShadow="true"
+                    Padding="15,20,0,20"
+                    CornerRadius="7">
+                    <Label 
+                    TextColor="Black"
+                        FontSize="16"
+                    BackgroundColor="White"
+                    Text="{Binding AgeTxt}"/>
+                </Frame>
+            </StackLayout>
+            <StackLayout Grid.Row="6" Grid.ColumnSpan="2" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                <Label
+                    Text="Member Since:"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    TextColor="Black"/>
+                <Label
+                    HorizontalOptions="Start"
+                    FontSize="18"
+                    TextColor="Black"
+                    Text="{Binding DateTxt}"></Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

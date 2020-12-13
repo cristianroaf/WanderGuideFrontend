@@ -28,7 +28,7 @@ namespace WanderGuideFrontend.Views
 
         private void GoToCreator(object sender, EventArgs e)
         {
-            //Navigation.PushAsync(new CreatorProfilePage(viewModel.guide.user_id));
+            Navigation.PushAsync(new CreatorProfilePage(viewModel.guide.user_id));
         }
     }
 }
